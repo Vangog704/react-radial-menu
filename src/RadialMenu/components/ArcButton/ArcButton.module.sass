@@ -1,0 +1,11 @@
+$btnCount: 12
+
+.container
+  overflow: visible
+  @for $i from 1 through $btnCount
+    &:nth-child(#{$i})
+      $c: 255 / $btnCount * $i
+      fill: rgb($c,45,$c)
+
+  & circle
+    fill: purple

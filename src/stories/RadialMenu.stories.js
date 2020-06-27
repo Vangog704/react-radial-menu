@@ -7,5 +7,7 @@ export default {
 };
 
 export const RadialMenuStates = () => (
-  <RadialMenu />
+  <div>
+    <RadialMenu />
+  </div>
 );
