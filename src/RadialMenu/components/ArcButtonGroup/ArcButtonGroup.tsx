@@ -24,19 +24,20 @@ interface ArcButtonGroupProps {
 export const ArcButtonGroup = ({ options, onHover }: ArcButtonGroupProps) => {
 
   return (
-    <>
+    <g>
       {options.map(
-        ({ aperture, angle, height, id }) => 
+        ({ aperture, angle, height, id, inRad }) => 
           <ArcButton
             aperture={aperture}
             angle={angle}
             height={height}
+            inRad={inRad}
             onHover={onHover}
             key={id}
             id={id}
           />
       )}
-    </>
+    </g>
   )
 }
 

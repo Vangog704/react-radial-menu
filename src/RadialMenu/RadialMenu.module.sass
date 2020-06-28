@@ -1,11 +1,13 @@
 
 .mainContainer
   perspective: 20cm
-  // background-color: #000F
-  width: 500px
-  height: 500px
+  background-color: #0000
+  width: 400px
+  height: 400px
+  filter: blur(.4px)
 
 .svgContainer
+  background-color: #0000
   fill: yellow
   overflow: visible
   transition-duration: .5s
@@ -14,4 +16,5 @@
     @for $i from 1 through 3
       &:nth-child(#{$i})
         $c: 255 / 3 * $i
-        fill: rgb($c,$c, 25)
+        fill: rgb($c,$c,0)
+

@@ -8,6 +8,8 @@ export default {
 
 export const RadialMenuStates = () => (
   <div>
-    <RadialMenu />
+    <RadialMenu count={10}/>
+    <RadialMenu count={3} height={70} inRad={30}/>
+    <RadialMenu count={6} height={100}/>
   </div>
 );

@@ -1,11 +1,11 @@
-$btnCount: 12
+$btnCount: 20
 
 .container
   overflow: visible
   @for $i from 1 through $btnCount
     &:nth-child(#{$i})
       $c: 255 / $btnCount * $i
-      fill: rgb($c,45,$c)
+      fill: rgb($c,0,$c)
 
   & circle
     fill: purple
@@ -14,5 +14,5 @@ $btnCount: 12
   path
     transition-duration: .5s
     transition-property: opacity
-  path:hover
+  &:hover
     opacity: .5

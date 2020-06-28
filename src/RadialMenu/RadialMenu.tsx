@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import Vec from 'victor';
 
 import styles from './RadialMenu.module.sass';
@@ -6,20 +6,23 @@ import { ArcButtonGroup } from './components/ArcButtonGroup/ArcButtonGroup';
 
 type RadialMenuProps = {
   count: number,
+  height: number,
+  inRad: number,
 }
 
 function rotateStyle(v: Vec) {
   return `rotateX(${v.y}deg) rotateY(${-v.x}deg) translate(${-v.x}px, ${-v.y}px)`
 }
 
-export const RadialMenu = ({ count }: RadialMenuProps) => {
+export const RadialMenu = ({ count, height, inRad }: RadialMenuProps) => {
 
-  const [options, setOptions] = useState(Array.from({ length: count }, () => 360/count)
+  const [options] = useState(Array.from({ length: count }, () => 360/count)
     .map((aperture, idx) => ({
       id: idx,
       aperture,
       angle: idx*aperture,
-      height:(1+idx)*10 + 50
+      height: height ? height : (1+idx)*8 + 30,
+      inRad,
     }))
   );
   const [rotVector, setRotVector] = useState(new Vec(0, 0));
@@ -30,10 +33,10 @@ export const RadialMenu = ({ count }: RadialMenuProps) => {
       <svg
         style={svgStyle}
         className={styles.svgContainer}
-        viewBox="-210 -210 420 420"
+        viewBox="-200 -200 400 400"
       >
-        {/* <circle cx={0} cy={0} r={200}></circle>
-        <circle cx={0} cy={0} r={100}></circle> */}
+        {/* <circle cx={0} cy={0} r={200}></circle> */}
+        {/* <circle cx={0} cy={0} r={100}></circle> */}
         <g>
           <ArcButtonGroup 
             id={1}
@@ -48,7 +51,9 @@ export const RadialMenu = ({ count }: RadialMenuProps) => {
 }
 
 RadialMenu.defaultProps = {
-  count: 6,
+  height: null,
+  count: 2,
+  inRad: 100,
 }
 
 export default RadialMenu;
