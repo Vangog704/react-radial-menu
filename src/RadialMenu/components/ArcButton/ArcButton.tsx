@@ -5,22 +5,23 @@ import { buildArcButton, ArcButtonConfigProps } from '../../utils/calcArcButtonC
 
 import styles from './ArcButton.module.sass';
 
-interface ArcButtonProps extends ArcButtonConfigProps {
+export interface ArcButtonProps extends ArcButtonConfigProps {
   id: number,
   
   onHover: (center: Vec) => void,
 };
 
-export const ArcButton = ({ id, onHover, ...rest }: ArcButtonProps) => {
+export const ArcButton = ({ onHover, height, aperture, inRad, angle, gap }: ArcButtonProps) => {
 
   // Calc shape
   const { center, path, iconSize } = useMemo(
-    () => buildArcButton({...rest}),
-    [rest]
+    () => {
+      return buildArcButton({height, aperture, inRad, angle, gap})},
+    [height, aperture, inRad, angle, gap]
   );
 
   const handleMouseOver = useCallback(
-    () => onHover(center.clone().normalize().multiply(new Vec(12,12))),
+    () => onHover(center.clone().normalize().multiply(new Vec(10,10))),
     [center, onHover],
   );
 
@@ -28,7 +29,6 @@ export const ArcButton = ({ id, onHover, ...rest }: ArcButtonProps) => {
     () => onHover(new Vec(0,0)),
     [onHover],
   );
-
   return (
     <g
       className={styles.container}

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Vec from 'victor';
 
-import ArcButton from './components/ArcButton/ArcButton';
-
 import styles from './RadialMenu.module.sass';
+import { ArcButtonGroup } from './components/ArcButtonGroup/ArcButtonGroup';
 
 type RadialMenuProps = {
   count: number,
@@ -15,9 +14,17 @@ function rotateStyle(v: Vec) {
 
 export const RadialMenu = ({ count }: RadialMenuProps) => {
 
+  const [options, setOptions] = useState(Array.from({ length: count }, () => 360/count)
+    .map((aperture, idx) => ({
+      id: idx,
+      aperture,
+      angle: idx*aperture,
+      height:(1+idx)*10 + 50
+    }))
+  );
   const [rotVector, setRotVector] = useState(new Vec(0, 0));
   const svgStyle = { transform: rotateStyle(rotVector) }
-  console.log(svgStyle);
+
   return (
     <div className={styles.mainContainer}>
       <svg
@@ -28,17 +35,12 @@ export const RadialMenu = ({ count }: RadialMenuProps) => {
         {/* <circle cx={0} cy={0} r={200}></circle>
         <circle cx={0} cy={0} r={100}></circle> */}
         <g>
-          {Array.from({ length: count }, () => 360/count).map(
-            (aperture, idx) => 
-              <ArcButton
-                aperture={aperture}
-                angle={idx*aperture}
-                height={(1+idx)*10 + 50}
-                onHover={setRotVector}
-                key={idx}
-                id={idx}
-              />
-            )}
+          <ArcButtonGroup 
+            id={1}
+            options={options}
+            onHover={setRotVector}
+            key={'main_arc_btn_group'}
+          />
         </g>
       </svg>
     </div>
