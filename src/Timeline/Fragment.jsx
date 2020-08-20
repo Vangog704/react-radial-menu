@@ -13,7 +13,7 @@ export const Fragment = (props) => {
   }, styles.fragment, className)
 
   return (
-    <div className={classes} style={{ width }} onClick={() => onClick(id)}>
+    <div className={classes} style={{ minWidth: `${width}%` }} onClick={() => onClick(id)}>
       {label}
     </div>
   )
