@@ -70,6 +70,7 @@
     "dist"
   ],
   "dependencies": {
+    "clsx": "^1.1.1",
     "node-sass": "^4.14.1",
     "victor": "^1.1.0"
   }

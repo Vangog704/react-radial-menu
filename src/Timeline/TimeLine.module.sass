@@ -1,0 +1,73 @@
+
+$container-bg-color: white
+$timeline-bg-color: crimson
+
+$main: #0056c7
+$white: mix($main, #ffffffa1)
+$lightwhite: mix($main,#ffffff6b)
+$black: mix($main, #000000de)
+$darkblack: mix($main, #00000077)
+
+$light: lighten($container-bg-color, 20%)
+$dark:  darken($container-bg-color, 20%)
+
+$vgap: 17px
+$hgap: 7px
+$gap: 2px
+$radius: 5px
+
+.container
+  background-color: $container-bg-color
+  height: 200px
+  width: 100%
+  display: flex
+  flex-direction: column
+  align-content: stretch
+
+.list
+  display: flex
+  height: 100%
+  padding: 2px
+  border: 1px solid $container-bg-color
+  box-shadow: inset 2px 2px 2px $dark, inset -2px -2px 2px $light, 2px 2px 5px $dark, -2px -2px 5px $light
+  justify-content: stretch
+
+.timeline
+  height: 40px
+  width: 100%
+  background-color: $timeline-bg-color 
+
+.fragment
+  box-sizing: border-box
+  padding: 10px 20px
+  color: grey
+  flex: 1 1
+  display: flex
+  height: 100%
+  position: relative
+  background-color: $main
+
+.fragment.active
+  color: white
+  background-color: lighten($main, 7%)
+
+.fragment::after
+  content: ''
+  position: absolute
+  height: 100%
+  width: 100%
+  top: 0
+  left: 0
+
+.fragment.active::after
+  background: linear-gradient(90deg, $lightwhite 0%, transparent $gap, transparent calc(100% - #{$gap}), $darkblack 100%), linear-gradient($lightwhite 0%, transparent $vgap, transparent calc(100% - #{$vgap}), $darkblack 100%)
+.fragment.active.first::after
+  border-radius: $radius 0 0 $radius
+  background: linear-gradient(90deg, $white 0%, transparent $hgap, transparent calc(100% - #{$gap}), $darkblack 100%), linear-gradient($lightwhite 0%, transparent $vgap, transparent calc(100% - #{$vgap}), $darkblack 100%)
+.fragment.active.last::after
+  border-radius: 0 $radius $radius 0
+  background: linear-gradient(90deg, $lightwhite 0%, transparent $gap, transparent calc(100% - #{$hgap}), $black 100%), linear-gradient($lightwhite 0%, transparent $vgap, transparent calc(100% - #{$vgap}), $darkblack 100%)
+.fragment.active.last.first::after
+  border-radius: $radius
+  background: linear-gradient(90deg, $white 0%, transparent $hgap, transparent calc(100% - #{$hgap}), $black 100%), linear-gradient($lightwhite 0%, transparent $vgap, transparent calc(100% - #{$vgap}), $darkblack 100%)
+
